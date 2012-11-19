@@ -36,7 +36,8 @@
                 inactiveClass: 'shiftenterInactive',
                 hint: 'Shift+Enter for line break',
                 metaKey: 'shift',     // Meta key that triggers a line-break, allowed values: 'shift', 'ctrl'
-                pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
+                pseudoPadding: '0 10', // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
+                onReturn: '' // callback when pressing only return
             },
             get_padding: function (padding) {
                 // Parse padding and return right & bottom padding
@@ -156,11 +157,14 @@
                         return false;
 
                     } else {
-                        $.shiftenter.log('Got Enter, submitting');
-                        // Submit form
                         event.preventDefault();
-                        $el.blur();
-                        $el.parents('form').submit();
+                        if (opts.onReturn) {
+                            opts.onReturn();
+                        }
+                        //$.shiftenter.log('Got Enter, submitting');
+                        // Submit form
+                        // $el.blur();
+                        // $el.parents('form').submit();
                         return false;
                     }
                 }

@@ -16,7 +16,11 @@ textarea {
 </form>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
-    $('textarea').shiftenter();
+  $('textarea').shiftenter({
+      'onReturn' : function() {
+          alert('onReturnCallback');
+      }
+  });
 });
 </script>
 </body>
